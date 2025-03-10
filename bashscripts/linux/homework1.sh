@@ -1,3 +1,4 @@
+#home create new user and group add to sudoer file give permission run sudo 
 #add new user
 sudo useradd awsbatch19 
 #create new group 
