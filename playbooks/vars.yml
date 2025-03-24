@@ -1,0 +1,9 @@
+# Variable definition file
+---
+packages:
+  web_package: httpd
+  db_package: mariadb-server
+
+paths:
+  fileserver: /home/ec2-user/srv/filer/{{ ansible_hostname }}
+  dbpath: /home/ec2-user/srv/database/{{ ansible_hostname }}

@@ -1,0 +1,10 @@
+---
+- hosts: dev
+  pre_tasks:
+    - debug:
+        msg: "Task before any role is applied"
+  roles:
+   - webserver
+  post_tasks:
+    - debug:
+        msg: "Task after all role is completed"

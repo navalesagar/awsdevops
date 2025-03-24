@@ -1,0 +1,38 @@
+# Start a few existing instances, run some tasks
+# and stop the instances
+# ansible-playbook 11b_ec2_start_stop.yml --tags stop-ec2
+# ansible-playbook 11b_ec2_start_stop.yml --tags start-ec2
+
+- name: Start sandbox instances
+  hosts: localhost
+  gather_facts: false
+  vars:
+    instance_ids: ['i-057c094d4d04085e7']
+    region: us-east-1
+  tasks:
+    - name: Start the EC2 instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        region: '{{ region }}'
+        state: running
+        wait: True
+        vpc_subnet_id: subnet-b95974dc
+        assign_public_ip: yes
+  tags: start-ec2
+
+- name: Stop sandbox instances
+  hosts: localhost
+  gather_facts: false
+  vars:
+    instance_ids: ['i-057c094d4d04085e7']
+    region: us-east-1
+  tasks:
+    - name: Stop the sandbox instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        region: '{{ region }}'
+        state: stopped
+        wait: True
+        vpc_subnet_id: subnet-b95974dc
+        assign_public_ip: yes
+  tags: stop-ec2

@@ -1,0 +1,17 @@
+# include_vars -> import variables from a file i.e vars.yml
+# https://docs.ansible.com/archive/ansible/2.4/include_vars_module.html
+
+---
+- name: Install web application packages
+  hosts: dev
+  tasks:
+    - name: Imports the variables from vars.yml
+      include_vars: vars.yml
+    - name: Debugs the variables imported
+      debug:
+        msg: "{{ packages['web_package'] }} and {{ packages.db_package }} have been imported"
+    - name: Creates the remote directory
+      file:
+        path: "{{ paths.fileserver }}"
+        state: directory
+        mode: 0755

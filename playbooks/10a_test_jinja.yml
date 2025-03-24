@@ -1,0 +1,19 @@
+# template module is similar to copy module, template module src file path is a Jinja J2 file extension
+# httpd.conf => Copy on webserver path, replace variables passed.
+---
+- name: Testing the Jinja Template with Playbook
+  hosts: all
+  become: yes
+  vars:
+    system_owner: Ansible_Admin@example.com
+
+  tasks:
+    - name: Execute Ansible Jinja2 Templates
+      template:
+        src: 10a_test_jinja.j2
+        dest: /tmp/test_jinja.conf
+        owner: root
+        group: root
+        mode: 0644        
+
+# ansible all -m shell -a "cat /tmp/test_jinja.conf"
